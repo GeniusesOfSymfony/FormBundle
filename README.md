@@ -1,5 +1,7 @@
 #Gos Form Bundle#
 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/GeniusesOfSymfony/FormBundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/GeniusesOfSymfony/FormBundle/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/GeniusesOfSymfony/FormBundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/GeniusesOfSymfony/FormBundle/?branch=master)
+
 **This project is currently in development, please take care.**
 
 Installation
