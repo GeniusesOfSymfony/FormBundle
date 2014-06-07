@@ -132,32 +132,15 @@ class FormHandler implements FormHandlerInterface
         $form = $this->getForm();
         $this->setFormMethod($method);
 
-        if ($this->hasRequestedMe($request, $form) === true) {
-            $form->handleRequest($request);
-            if ($form->isValid()) {
-                $this->onSuccess($form->getData());
-                return true;
-            } else {
-                $this->onError($form->getData());
-                return false;
-            }
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $this->onSuccess($form->getData());
+            return true;
+        } else {
+            $this->onError($form->getData());
+            return false;
         }
-
-        return null;
-    }
-
-    /**
-     * @param               $method
-     * @param Request       $request
-     * @param FormInterface $form
-     *
-     * @return bool
-     */
-    public function hasRequestedMe(Request $request, FormInterface $form)
-    {
-        $requestedData = $this->resolveParameters($this->formMethod, $request);
-
-        return $this->formMethod === $request->getMethod() && $requestedData->has($form->getName());
     }
 
     /**
@@ -220,4 +203,6 @@ class FormHandler implements FormHandlerInterface
         //stub, to implement if needed
         return true;
     }
+
+
 }

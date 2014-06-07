@@ -25,7 +25,5 @@ interface FormHandlerInterface
 
     public function handle($method = FormHandler::POST_METHOD);
 
-    public function hasRequestedMe(Request $request, FormInterface $form);
-
     public function createView();
 }
