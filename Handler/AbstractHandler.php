@@ -20,7 +20,7 @@ abstract class AbstractHandler implements HandlerInterface
      */
     public function perform($action)
     {
-        if(in_array($action, array_keys($actions = $this->supportedAction()))){
+        if (in_array($action, array_keys($actions = $this->supportedAction()))) {
             $this->scheduleAction = $actions[$action];
         }
 
@@ -48,4 +48,4 @@ abstract class AbstractHandler implements HandlerInterface
     {
         $this->doPerform();
     }
-} 
+}

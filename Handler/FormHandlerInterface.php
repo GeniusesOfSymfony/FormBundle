@@ -1,10 +1,7 @@
 <?php
 namespace Gos\Bundle\FormBundle\Handler;
 
-use Closure;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 interface FormHandlerInterface

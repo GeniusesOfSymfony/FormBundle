@@ -136,16 +136,18 @@ class FormHandler implements FormHandlerInterface
 
         if ($form->isValid()) {
             $this->onSuccess($form->getData());
+
             return true;
         } else {
             $this->onError($form->getData());
+
             return false;
         }
     }
 
     /**
      * @param array $options
-     * Implemented to handle form inside sub request properly.
+     *                       Implemented to handle form inside sub request properly.
      *
      * @return mixed
      */
@@ -203,6 +205,5 @@ class FormHandler implements FormHandlerInterface
         //stub, to implement if needed
         return true;
     }
-
 
 }

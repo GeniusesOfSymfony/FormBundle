@@ -10,4 +10,4 @@ interface HandlerInterface
     public function with($data);
 
     public function handle();
-} 
+}
