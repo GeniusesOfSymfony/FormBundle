@@ -16,12 +16,12 @@ class FormHandlerCompilerPass implements CompilerPassInterface
             $formHandler = $container->getDefinition($id);
 
             $formHandler
-                ->addMethodCall('setFormFactory', array(new Reference('form.factory')))
-                ->addMethodCall('setRequestStack', array(new Reference('request_stack')))
+                ->addMethodCall('setFormFactory', [new Reference('form.factory')])
+                ->addMethodCall('setRequestStack', [new Reference('request_stack')])
             ;
 
             foreach ($tagAttributes as $attributes) {
-                $formHandler->addMethodCall('setFormName', array($attributes['form']));
+                $formHandler->addMethodCall('setFormName', [$attributes['form']]);
             }
         }
     }

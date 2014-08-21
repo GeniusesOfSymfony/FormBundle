@@ -26,7 +26,7 @@ class FormHandler implements FormHandlerInterface
     /**
      * @var array
      */
-    protected $formOptions = array();
+    protected $formOptions = [];
 
     /**
      * @var null|FormInterface
@@ -78,7 +78,7 @@ class FormHandler implements FormHandlerInterface
     }
 
     /**
-     * @return null
+     * @return FormInterface
      * @throws \Exception
      */
     public function getForm()
@@ -91,10 +91,9 @@ class FormHandler implements FormHandlerInterface
     }
 
     /**
-     * @param null  $data
-     * @param array $options
+     * @param array $formOptions
      */
-    public function createForm($formData = null, array $formOptions = array())
+    public function createForm($formData = null, array $formOptions = [])
     {
         /**
          * Symfony 3.0 Form $data as argument is deprecated, use $options['data'] instead
@@ -115,11 +114,9 @@ class FormHandler implements FormHandlerInterface
     }
 
     /**
-     * @param string   $method
-     * @param callable $successHandler
-     * @param callable $errorHandler
+     * @param string $method
      *
-     * @return bool|null
+     * @return boolean
      * @throws \Exception
      */
     public function handle($method = self::POST_METHOD)
@@ -138,20 +135,20 @@ class FormHandler implements FormHandlerInterface
             $this->onSuccess($form->getData());
 
             return true;
-        } else {
-            $this->onError($form->getData());
-
-            return false;
         }
+
+        $this->onError($form->getData());
+
+        return false;
     }
 
     /**
      * @param array $options
      *                       Implemented to handle form inside sub request properly.
      *
-     * @return mixed
+     * @return Request|null
      */
-    protected function getRequest(array $options = array())
+    protected function getRequest(array $options = [])
     {
         return $this->requestStack->getCurrentRequest();
     }
@@ -159,7 +156,7 @@ class FormHandler implements FormHandlerInterface
     /**
      * @param $method
      *
-     * @return mixed
+     * @return \Symfony\Component\HttpFoundation\ParameterBag
      */
     protected function resolveParameters($method, Request $request)
     {
