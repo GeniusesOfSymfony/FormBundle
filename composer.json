@@ -16,10 +16,10 @@
         "sensio/framework-extra-bundle": "~3.0"
     },
     "autoload": {
-        "psr-4": { "Gos\\Bundle\\FormBundle\\": "Gos/Bundle/FormBundle" }
+        "psr-4": { "Gos\\Bundle\\FormBundle\\": "" }
     },
     "autoload-dev": {
-        "psr-4": { "Gos\\Bundle\\FormBundle\\Test": "Gos/Bundle/FormBundle/Test" }
+        "psr-4": { "Gos\\Bundle\\FormBundle\\Tests\\": "/Tests" }
     },
     "extra": {
         "branch-alias": {
