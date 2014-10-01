@@ -50,4 +50,9 @@ interface FormHandlerInterface
      * @return \Symfony\Component\Form\FormView
      */
     public function createView();
+
+    /**
+     * @return boolean
+     */
+    public function process($data = null, array $options = []);
 }

@@ -6,11 +6,6 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-/**
- * Class FormHandler
- * @package Gos\Bundle\CoreBundle\Form\Handler
- *  FormHandler, can be use standalone (without extend, parent or anything)
- */
 class FormHandler implements FormHandlerInterface
 {
     /**
@@ -91,6 +86,17 @@ class FormHandler implements FormHandlerInterface
     }
 
     /**
+     * @return boolean
+     * Generic/Simple process, feel free to override it.
+     */
+    public function process($data = null, array $options = [])
+    {
+        $this->createForm($data, $options);
+
+        return $this->handle();
+    }
+
+    /**
      * @param array $formOptions
      */
     public function createForm($formData = null, array $formOptions = [])
@@ -102,7 +108,11 @@ class FormHandler implements FormHandlerInterface
             $this->formOptions['data'] = $formData;
         }
 
-        $this->form = $this->formFactory->create($this->formName, null, array_merge($this->formOptions, $formOptions));
+        $this->form = $this->formFactory->create(
+            $this->formName,
+            null,
+            array_merge($this->formOptions, $formOptions)
+        );
     }
 
     /**
@@ -131,15 +141,16 @@ class FormHandler implements FormHandlerInterface
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
-            $this->onSuccess($form->getData());
+        if($form->isSubmitted()){
+            if ($form->isValid()) {
+                $this->onSuccess($form->getData());
 
-            return true;
+                return true;
+            }
+
+            $this->onError($form->getData());
+            return false;
         }
-
-        $this->onError($form->getData());
-
-        return false;
     }
 
     /**
