@@ -34,16 +34,6 @@ class FormHandler implements FormHandlerInterface
     protected $requestStack;
 
     /**
-     * @var string
-     */
-    protected $formMethod;
-
-    const POST_METHOD = 'POST';
-    const GET_METHOD = 'GET';
-    const PUT_METHOD = 'PUT';
-    const DELETE_METHOD = 'DELETE';
-
-    /**
      * @param RequestStack $requestStack
      */
     public function setRequestStack(RequestStack $requestStack)
@@ -67,11 +57,6 @@ class FormHandler implements FormHandlerInterface
         $this->formName = $formName;
     }
 
-    public function setFormMethod($method = self::POST_METHOD)
-    {
-        $this->formMethod = $method;
-    }
-
     /**
      * @return FormInterface
      * @throws \Exception
@@ -86,14 +71,21 @@ class FormHandler implements FormHandlerInterface
     }
 
     /**
-     * @return boolean
-     * Generic/Simple process, feel free to override it.
+     * @param null  $data
+     * @param array $options
+     *
+     * @return bool
+     * @throws \Exception
      */
-    public function process($data = null, array $options = [])
+    public function handle($data = null, array $options = [])
     {
         $this->createForm($data, $options);
 
-        return $this->handle();
+        if (true !== $this->supportsClass()) {
+            throw new \Exception(sprintf('Class %s not supported', get_class($this->form)));
+        }
+
+        return $this->doHandle($this->getRequest(), $this->getForm());
     }
 
     /**
@@ -124,38 +116,27 @@ class FormHandler implements FormHandlerInterface
     }
 
     /**
-     * @param string $method
-     *
-     * @return boolean
+     * @return bool
      * @throws \Exception
      */
-    public function handle($method = self::POST_METHOD)
+    protected function doHandle(Request $request, FormInterface $form)
     {
-        if (true !== $this->supportsClass()) {
-            throw new \Exception(sprintf('Class %s not supported', get_class($this->form)));
-        }
-
-        $request = $this->getRequest();
-        $form = $this->getForm();
-        $this->setFormMethod($method);
-
         $form->handleRequest($request);
 
         if($form->isSubmitted()){
             if ($form->isValid()) {
-                $this->onSuccess($form->getData());
-
+                $this->onSuccess($request, $form->getData());
                 return true;
             }
 
-            $this->onError($form->getData());
+            $this->onError($request, $form->getData());
             return false;
         }
     }
 
     /**
      * @param array $options
-     *                       Implemented to handle form inside sub request properly.
+     * Implemented to handle form inside sub request properly.
      *
      * @return Request|null
      */
@@ -179,7 +160,7 @@ class FormHandler implements FormHandlerInterface
      *
      * @return bool
      */
-    protected function onSuccess($data)
+    protected function onSuccess(Request $request, $data)
     {
         //stub, to implement if needed
         return true;
@@ -190,7 +171,7 @@ class FormHandler implements FormHandlerInterface
      *
      * @return bool
      */
-    protected function onError($data)
+    protected function onError(Request $request, $data)
     {
         //stub, to implement if needed
         return false;

@@ -6,6 +6,12 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 interface FormHandlerInterface
 {
+    const POST_METHOD = 'POST';
+    const GET_METHOD = 'GET';
+    const PUT_METHOD = 'PUT';
+    const DELETE_METHOD = 'DELETE';
+
+
     /**
      * @return string
      */
@@ -27,11 +33,6 @@ interface FormHandlerInterface
     public function setFormName($formName);
 
     /**
-     * @return void
-     */
-    public function setFormMethod($method = FormHandler::POST_METHOD);
-
-    /**
      * @return \Symfony\Component\Form\FormInterface
      */
     public function getForm();
@@ -42,17 +43,16 @@ interface FormHandlerInterface
     public function createForm($formData = null, array $formOptions = []);
 
     /**
-     * @return boolean
-     */
-    public function handle($method = FormHandler::POST_METHOD);
-
-    /**
      * @return \Symfony\Component\Form\FormView
      */
     public function createView();
 
     /**
-     * @return boolean
+     * @param null  $data
+     * @param array $options
+     *
+     * @return bool
+     * @throws \Exception
      */
-    public function process($data = null, array $options = []);
+    public function handle($data = null, array $options = []);
 }
