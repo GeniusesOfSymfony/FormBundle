@@ -81,7 +81,7 @@ Your handler is now created. By default we provide a generic process :
      * @return boolean
      * Generic/Simple process, feel free to override it.
      */
-    public function process($data = null, array $options = [])
+    public function handle($data = null, array $options = [])
     {
         $this->createForm($data, $options);
 
@@ -192,7 +192,7 @@ class UserController extends AbstractController
     {
         $response = new Response();
 
-        if (true === $this->registrationFormHandler->process()) {
+        if (true === $this->registrationFormHandler->handle()) {
             $this->addFlashBag('success', 'user_registration.success');
 
             return $this->httpUtils->createRedirectResponse($request, 'login');
