@@ -123,20 +123,22 @@ class FormHandler implements FormHandlerInterface
     {
         $form->handleRequest($request);
 
-        if($form->isSubmitted()){
+        if ($form->isSubmitted()) {
             if ($form->isValid()) {
                 $this->onSuccess($request, $form->getData());
+
                 return true;
             }
 
             $this->onError($request, $form->getData());
+
             return false;
         }
     }
 
     /**
      * @param array $options
-     * Implemented to handle form inside sub request properly.
+     *                       Implemented to handle form inside sub request properly.
      *
      * @return Request|null
      */

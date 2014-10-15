@@ -11,7 +11,6 @@ interface FormHandlerInterface
     const PUT_METHOD = 'PUT';
     const DELETE_METHOD = 'DELETE';
 
-
     /**
      * @return string
      */
