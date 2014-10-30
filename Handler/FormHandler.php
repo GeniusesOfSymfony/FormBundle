@@ -162,7 +162,7 @@ class FormHandler implements FormHandlerInterface
      *
      * @return bool
      */
-    protected function onSuccess(Request $request, $data)
+    public function onSuccess(Request $request, $data)
     {
         //stub, to implement if needed
         return true;
@@ -173,7 +173,7 @@ class FormHandler implements FormHandlerInterface
      *
      * @return bool
      */
-    protected function onError(Request $request, $data)
+    public function onError(Request $request, $data)
     {
         //stub, to implement if needed
         return false;

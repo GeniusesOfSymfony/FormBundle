@@ -2,6 +2,7 @@
 namespace Gos\Bundle\FormBundle\Handler;
 
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 interface FormHandlerInterface
@@ -54,4 +55,18 @@ interface FormHandlerInterface
      * @throws \Exception
      */
     public function handle($data = null, array $options = []);
+
+    /**
+     * @param mixed $data
+     *
+     * @return bool
+     */
+    public function onSuccess(Request $request, $data);
+
+    /**
+     * @param mixed $data
+     *
+     * @return bool
+     */
+    public function onError(Request $request, $data);
 }
