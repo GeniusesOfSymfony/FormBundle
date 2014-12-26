@@ -196,5 +196,4 @@ class FormHandler implements FormHandlerInterface
         //stub, to implement if needed
         return true;
     }
-
 }

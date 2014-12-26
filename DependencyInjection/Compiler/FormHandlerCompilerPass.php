@@ -17,8 +17,7 @@ class FormHandlerCompilerPass implements CompilerPassInterface
 
             $formHandler
                 ->addMethodCall('setFormFactory', [new Reference('form.factory')])
-                ->addMethodCall('setRequestStack', [new Reference('request_stack')])
-            ;
+                ->addMethodCall('setRequestStack', [new Reference('request_stack')]);
 
             foreach ($tagAttributes as $attributes) {
                 $formHandler->addMethodCall('setFormName', [$attributes['form']]);
