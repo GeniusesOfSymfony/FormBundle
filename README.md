@@ -7,6 +7,8 @@ The GOSFormBundle adds support for easily handling your forms. Stop wast your ti
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/GeniusesOfSymfony/FormBundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/GeniusesOfSymfony/FormBundle/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/GeniusesOfSymfony/FormBundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/GeniusesOfSymfony/FormBundle/?branch=master)
 
+Gos Doctrine Query Builder follows the rules of [Semantic Versioning](http://semver.org/) and [psr-2 coding style](http://www.php-fig.org/psr/psr-2/)
+
 Documentation
 =============
 
